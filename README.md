@@ -1,10 +1,11 @@
 Private FoundryVTT server
 =========================
 
+
 Private Foundry VTT server using caddy-tailscale
 
 
-### Usage 
+### Usage
 
 Download and copy the Foundry distribution file to a folder that will be used for the Foundrydata
 
@@ -23,5 +24,8 @@ After this you can run the container. Be sure to set the `TS_AUTHKEY` value
 
 
 ```
-$ podman run -it -v ./foundrydata:/data --env=TS_AUTHKEY=tskey-auth-... foundry
+$ podman run -it \
+   -v ./foundrydata:/data
+   --env=TS_AUTHKEY=tskey-auth-...
+   ghcr.io/spotsnel/caddy-tailscale-foundryvtt-server
 ```
