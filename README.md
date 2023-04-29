@@ -1,6 +1,8 @@
 Private FoundryVTT server
 =========================
 
+**Fight goblins, not unwelcome guests!**
+
 
 Private Foundry VTT server using caddy-tailscale
 
