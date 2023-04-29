@@ -1,2 +1,5 @@
-# caddy-tailscale-foundry-server
+Private FoundryVTT server
+=========================
+
 Private Foundry VTT server using caddy-tailscale
+
