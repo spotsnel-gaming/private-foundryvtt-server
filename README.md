@@ -30,9 +30,10 @@ After this you can run the container. Be sure to set the `TS_AUTHKEY` value
 
 
 ```
-$ podman run -it \
-   -v ./foundrydata:/data
-   --env=TS_AUTHKEY=tskey-auth-...
+$ podman run -d \
+   --name=foundryvtt \
+   -v ./foundrydata:/data \
+   --env=TS_AUTHKEY=tskey-auth-... \
    ghcr.io/spotsnel/caddy-tailscale-foundryvtt-server
 ```
 
