@@ -4,8 +4,11 @@
 
 # if not exists /app/resources/app/main/js
 appready=false
-if [ -e /app/resources/app/main.js ]
+main=/app/resources/app/main.js
+
+if [ -e "$main" ]
 then
+    echo "READY!"
     appready=true
 else
 
@@ -25,7 +28,8 @@ fi
 
 if [ "$appready" = true ]
 then
-    node /app/resources/app/main.js --headless --dataPath=/data/
+    node $main --headless --dataPath=/data/ &
+    caddy run --config /app/Caddyfile
 else
     echo "App not ready. Unable to start"
     exit 1

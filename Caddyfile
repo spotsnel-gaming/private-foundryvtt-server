@@ -1,0 +1,4 @@
+:80 {
+  bind tailscale/foundryvtt
+  reverse_proxy :30000
+}
