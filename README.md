@@ -4,6 +4,8 @@ Private FoundryVTT server
 
 Private Foundry VTT server using caddy-tailscale
 
+![](./screenshot.jpg)
+
 
 Note: you need to have a license key to use FoundryVTT
 
