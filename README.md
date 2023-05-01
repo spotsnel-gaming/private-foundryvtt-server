@@ -52,10 +52,10 @@ and finish the configuration or login.
 
 
 ### Build
-To build the `Containefile`, please do:
+To build the `Dockerfile`, please do:
 
 ```
-$ podman build -t foundryvtt -f Containerfile .
+$ podman build -t foundryvtt .
 ```
 
 and use `podman run ... foundryvtt` instead.
