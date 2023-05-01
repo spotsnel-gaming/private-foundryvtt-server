@@ -47,8 +47,12 @@ after which you can navigate to:
 
     http://foundryvtt
 
-
 and finish the configuration or login.
+
+
+##### Note
+
+This image is available in both `x86_64` (AMD64) and `aarch64` (arm64) format. If you have issues on deployment, you can use the `--platform=linux/amd64` or `--platform=linux/arm64` to force a specific platform.
 
 
 ### Build
@@ -60,5 +64,6 @@ $ podman build -t foundryvtt .
 
 and use `podman run ... foundryvtt` instead.
 
-Note:
+##### Note
 You can rebuild the `caddy-tailscale` with the included `Containerfile`. For this you need to modify the `builder` that is used.
+
