@@ -1,0 +1,9 @@
+tasks:
+  - name: tailscale
+    command: |
+      cd /tmp
+      wget https://pkgs.tailscale.com/stable/tailscale_1.38.2_amd64.tgz
+      tar zxvf tailscale_1.38.2_amd64.tgz
+      sudo mv tailscale_*/tailscale{,d} /usr/sbin/
+      sudo tailscaled --state=/var/lib/tailscale/tailscaled.state --socket=/run/tailscale/tailscaled.sock --port 41641 2>/dev/null &
+      sudo tailscale up --authkey=${TAILSCALE_AUTHKEY} --operator=gitpod --netfilter-mode=off --ssh
