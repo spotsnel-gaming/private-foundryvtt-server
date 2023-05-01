@@ -36,7 +36,7 @@ $ podman run -d \
    --name=foundryvtt \
    -v ./foundrydata:/data \
    --env=TS_AUTHKEY=tskey-auth-... \
-   ghcr.io/spotsnel/caddy-tailscale-foundryvtt-server
+   ghcr.io/spotsnel/private-foundryvtt-server
 ```
 
 If the node joined your tailnet, it should show up as `foundryvtt` in:
