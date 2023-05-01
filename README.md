@@ -4,7 +4,12 @@ Private FoundryVTT server
 **Fight goblins, not unwelcome guests!**
 
 
-Private Foundry VTT server using caddy-tailscale
+Private Foundry VTT server using Caddy and [Tailscale](https://tailscale.com). 
+
+This container image enables you to run a private Foundry VTT with an 
+emphasis on simplicity. It uses Tailscale to expose this as a private
+service on a Tailnet. Instead of fighting configuration and passwords,
+you can focus on gaming and fighting goblins.
 
 ![](./screenshot.jpg)
 
@@ -13,11 +18,10 @@ Note: you need to have a license key to use FoundryVTT
 
 
 ### Usage
-
-Download and copy the Foundry distribution file to a folder that will be used for the Foundrydata
+Download and copy the Foundry distribution file to a folder that will be used for the Foundry data folder.
 
 ```
-$ mkdir -p ./foundrydata/
+$ mkdir -p ~/foundrydata/
 # copy file as FoundryVTT*.zip or foundryvtt.zip to ./foundrydata
 ```
 
@@ -26,15 +30,15 @@ Obtain a Tailscale authentication key from
    https://login.tailscale.com/admin/settings/keys
 
 
-Depending on your needs, set the expiration of the key, if it tags the node, etc. Make sure the ACL is set to allow access to othe people in your tailnet.
+Depending on your needs, set the expiration of the key, if it tags the node, etc. Make sure the ACL is set to allow access to other people in your tailnet.
 
-After this you can run the container. Be sure to set the `TS_AUTHKEY` value
+After this, you can run the container. Be sure to set the `TS_AUTHKEY` value
 
 
 ```
 $ podman run -d \
    --name=foundryvtt \
-   -v ./foundrydata:/data \
+   -v ~/foundrydata:/data \
    --env=TS_AUTHKEY=tskey-auth-... \
    ghcr.io/spotsnel-gaming/private-foundryvtt-server
 ```
@@ -47,12 +51,14 @@ after which you can navigate to:
 
     http://foundryvtt
 
-and finish the configuration or login.
+and finish the configuration or log in.
 
 
 ##### Note
 
-This image is available in both `x86_64` (AMD64) and `aarch64` (arm64) format. If you have issues on deployment, you can use the `--platform=linux/amd64` or `--platform=linux/arm64` to force a specific platform.
+This image is available in both `x86_64` (AMD64) and `aarch64` (arm64) format. If you have issues during deployment, you can use the `--platform=linux/amd64` or `--platform=linux/arm64` to force a specific platform.
+
+These images have been tested on various cloud providers, such as AWS, and Oracle Cloud.
 
 
 ### Build
@@ -65,7 +71,7 @@ $ podman build -t foundryvtt .
 and use `podman run ... foundryvtt` instead.
 
 ##### Note
-You can rebuild the `caddy-tailscale` with the included `Containerfile`. For this you need to modify the `builder` that is used.
+You can rebuild the `caddy-tailscale` binary with the included `Dockerfile`. For this, you need to modify the `builder` that is used.
 
 
 ## Author
@@ -86,4 +92,4 @@ Become a patron or sponsor, by simply clicking one of these buttons
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/gbraad)
 
-[![PayPal donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40gbraad%2enl&lc=US&item_name=gbraad&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
+[![PayPal Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40gbraad%2enl&lc=US&item_name=gbraad&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
