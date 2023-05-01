@@ -13,9 +13,10 @@ FROM alpine:latest AS builder
 
 RUN mkdir /workspace \
     && cd /workspace \
-    && wget https://github.com/spotsnel/caddy-tailscale/releases/download/0.5/caddy-amd64.gz \
-    && gunzip caddy-amd64.gz \
-    && mv caddy-amd64 caddy \
+    && arch=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) \
+    && wget https://github.com/spotsnel/caddy-tailscale/releases/download/0.5/caddy-${arch}.gz \
+    && gunzip caddy-${arch}.gz \
+    && mv caddy-${arch} caddy \
     && chmod +x caddy
 
 # ---
@@ -32,4 +33,3 @@ COPY start.sh /app
 VOLUME /data
 
 ENTRYPOINT "/app/start.sh"
-
