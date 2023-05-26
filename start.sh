@@ -28,8 +28,38 @@ fi
 
 if [ "$appready" = true ]
 then
-    node $main --headless --dataPath=/data/ &
-    caddy run --config /app/Caddyfile
+
+    echo 'Starting up Tailscale...'
+
+    /app/tailscaled --verbose=1 --port 41641 --tun=userspace-networking &
+    sleep 5
+    if [ ! -S /var/run/tailscale/tailscaled.sock ]; then
+        echo "tailscaled.sock does not exist. exit!"
+        exit 1
+    fi
+
+    until /app/tailscale up \
+        --authkey=${TAILSCALE_AUTH_KEY} \
+        --hostname=foundryvtt \
+        --ssh
+    do
+        sleep 0.1
+    done
+
+    echo 'Tailscale serve FoundryVTT proxy...'
+
+    /app/tailscale serve tcp:80 tcp://localhost:30000
+
+    echo 'Tailscale started'
+
+    echo 'Starting up FoundryVTT...'
+
+    while true; do
+        node $main --headless --dataPath=/data/
+        echo "Restarting FoundryVTT service"
+        sleep 2s
+    done
+
 else
     echo "App not ready. Unable to start"
     exit 1

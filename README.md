@@ -4,7 +4,7 @@ Private FoundryVTT server
 **Fight goblins, not unwelcome guests!**
 
 
-Private Foundry VTT server using Caddy and [Tailscale](https://tailscale.com). 
+Private Foundry VTT server using [Tailscale](https://tailscale.com). 
 
 This container image enables you to run a private Foundry VTT with an 
 emphasis on simplicity. It uses Tailscale to expose this as a private
@@ -32,14 +32,14 @@ Obtain a Tailscale authentication key from
 
 Depending on your needs, set the expiration of the key, if it tags the node, etc. Make sure the ACL is set to allow access to other people in your tailnet.
 
-After this, you can run the container. Be sure to set the `TS_AUTHKEY` value
+After this, you can run the container. Be sure to set the `TAILSCALE_AUTH_KEY` value
 
 
 ```
 $ podman run -d \
    --name=foundryvtt \
    -v ~/foundrydata:/data \
-   --env=TS_AUTHKEY=tskey-auth-... \
+   --env=TAILSCALE_AUTH_KEY=tskey-auth-... \
    ghcr.io/spotsnel-gaming/private-foundryvtt-server:main
 ```
 
@@ -69,9 +69,6 @@ $ podman build -t foundryvtt .
 ```
 
 and use `podman run ... foundryvtt` instead.
-
-##### Note
-You can rebuild the `caddy-tailscale` binary with the included `Dockerfile`. For this, you need to modify the `builder` that is used.
 
 
 ## Author
