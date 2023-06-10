@@ -61,6 +61,20 @@ This image is available in both `x86_64` (AMD64) and `aarch64` (arm64) format. I
 These images have been tested on various cloud providers, such as AWS, and Oracle Cloud.
 
 
+### Systemd
+After this you can use systemd to maintain the state of the container
+```
+$ (cd $HOME/.config/systemd/user && podman generate systemd --name --files foundryvtt)
+$ systemctl --user enable --now container-foundryvtt
+$ loginctl enable-linger [username]
+```
+
+You can check the state of the container with:
+```
+ $systemctl --user status container-foundryvtt
+```
+
+
 ### Build
 To build the `Dockerfile`, please do:
 
